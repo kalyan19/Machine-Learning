@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 
-def create_weights(shape, std = 0.01):
+def create_weights(shape, std = 0.1):
     shape = tf.TensorShape(shape)
     init_values = tf.truncated_normal(shape, stddev = std)
     return tf.Variable(init_values)
@@ -31,7 +31,8 @@ def build_network(input_layer, output_layer_size, neurons = 30):
     w2 = create_weights([neurons, output_layer_size])
     b2 = create_biases([output_layer_size])
     z2 = tf.add(tf.matmul(a1, w2), b2)
-    output_layer = tf.nn.sigmoid(z2)
+    output_layer = tf.nn.softmax(z2)
+    #output_layer = z2
     return output_layer
 
 # input -> output
@@ -43,7 +44,7 @@ def build_simple_network(input_layer, output_layer_size):
 
 def create_cost_fn(y_pred, y_true):
     # change this later to logits
-    #cost = tf.reduce_mean(tf.losses.mean_squared_error(y_true, y_pred))
+    #cost = tf.losses.softmax_cross_entropy(y_true, y_pred)
     cost = tf.losses.mean_squared_error(y_true, y_pred)
     return cost
 
