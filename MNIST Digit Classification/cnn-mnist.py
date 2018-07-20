@@ -107,6 +107,9 @@ def main(unused_argv):
   eval_data = mnist.test.images  # Returns np.array
   eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
 
+
+
+
   # Create the Estimator
   mnist_classifier = tf.estimator.Estimator(model_fn=cnn_model_fn, model_dir="/tmp/mnist_convnet_model")
 
@@ -114,7 +117,7 @@ def main(unused_argv):
   # Log the values in the "Softmax" tensor with label "probabilities"
   tensors_to_log = {"probabilities": "softmax_tensor"}
   logging_hook = tf.train.LoggingTensorHook(
-      tensors=tensors_to_log, every_n_iter=50)
+      tensors=tensors_to_log, every_n_iter=500)
 
   # Train the model
   train_input_fn = tf.estimator.inputs.numpy_input_fn(
@@ -135,7 +138,8 @@ def main(unused_argv):
       num_epochs=1,
       shuffle=False)
   eval_results = mnist_classifier.evaluate(input_fn=eval_input_fn)
-  print(eval_results)
+  #print(eval_results)
+
 
 if __name__ == "__main__":
   tf.app.run()
