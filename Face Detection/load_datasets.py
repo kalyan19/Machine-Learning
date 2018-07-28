@@ -25,9 +25,9 @@ def load_datasets():
     neg_labels = np.full( len(neg_file_names), 0)
     file_names =  np.concatenate((pos_file_names, neg_file_names), axis = 0)
     labels = np.concatenate((pos_labels, neg_labels), axis = 0)
-    train_data = np.asarray([convert_to_img(filename) for filename in file_names], dtype=np.float32)
+    #train_data = np.asarray([convert_to_img(filename) for filename in file_names], dtype=np.float32)
     train_labels = labels
-    train_dataset = train_data, train_labels
+    train_dataset = file_names, train_labels
 
     pos_file_names = ["{}/{}".format(POS_VALID_DIR, file_name) for file_name in os.listdir(POS_VALID_DIR) if file_name.endswith('.png')]
     pos_labels = np.full( len(pos_file_names), 1)
@@ -35,9 +35,9 @@ def load_datasets():
     neg_labels = np.full( len(neg_file_names), 0)
     file_names =  np.concatenate((pos_file_names, neg_file_names), axis = 0)
     labels = np.concatenate((pos_labels, neg_labels), axis = 0)
-    valid_data = np.asarray([convert_to_img(filename) for filename in file_names], dtype=np.float32)
+    #valid_data = np.asarray([convert_to_img(filename) for filename in file_names], dtype=np.float32)
     valid_labels = labels
-    valid_dataset = valid_data, valid_labels
+    valid_dataset = file_names, valid_labels
 
     pos_file_names = ["{}/{}".format(POS_EVAL_DIR, file_name) for file_name in os.listdir(POS_EVAL_DIR) if file_name.endswith('.png')]
     pos_labels = np.full( len(pos_file_names), 1)
